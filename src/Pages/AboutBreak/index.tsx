@@ -9,8 +9,14 @@ import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
 import { IconCloud } from "@/components/ui/interactive-icon-cloud";
 import AnimationButton from "@/components/ui/AnimationButton";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import CardBorder from "@/components/ui/CardBorder";
+import {
+  ContainerAnimated,
+  ContainerStagger,
+  GalleryGrid,
+  GalleryGridCell,
+} from "@/components/cta-section-with-gallery";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const AboutMe = () => {
   return (
@@ -87,9 +93,11 @@ const AboutMe = () => {
       </div>
 
       {/* Grid section */}
-      
-      <div className="mb-32 bg-gray-100 mt-32 h-full">
-        <div className="text-5xl md:text-8xl mb-10 bg-clip-text text-transparent bg-gradient-to-b from-neutral-300 to-red-500 text-center font-mono ">About Me</div>
+
+      <div className="mb-16  mt-32 h-full">
+        <div className="text-5xl md:text-8xl mb-10 bg-clip-text text-transparent bg-gradient-to-b from-neutral-300 to-red-500 text-center font-mono ">
+          About Me
+        </div>
         <ul className="grid grid-cols-1 md:grid-cols-12 gap-6 p-4 md:p-8 xl:max-h-[48rem]">
           <GridItem
             area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
@@ -148,17 +156,40 @@ const AboutMe = () => {
           />
         </ul>
       </div>
-      <div className="h-[40rem] relative flex flex-col mt-16  md:flex-row  w-screen min-w items-center justify-center  overflow-hidden rounded-lg backdrop-blur-2xl ">
-        <CardBorder>
-          <div className="text-3xl md:text-7xl mb-10 bg-clip-text text-transparent bg-gradient-to-b from-neutral-300 to-red-500 text-center font-mono"
-          >HOBBIT & INTERESTING</div>
-          <InfiniteMovingCards
-            items={testimonials}
-            direction="right"
-            speed="normal"
-          />
-        </CardBorder>
-      </div>
+      <section>
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-8 py-12 md:grid-cols-2 mb-16">
+          <ContainerStagger>
+            <ContainerAnimated className="mb-4 block text-xs font-medium text-rose-500 dark:text-rose-500 md:text-3xl">
+              Innovate & Grow
+            </ContainerAnimated>
+            <ContainerAnimated className="text-4xl font-semibold md:text-[5rem] tracking-tight dark:text-gray-100 text-black">
+              Scale Your Business Through Innovation
+            </ContainerAnimated>
+            <ContainerAnimated className="my-4 text-base text-slate-400  md:my-6 md:text-lg">
+              Transform your startup&apos;s potential through innovative
+              solutions and strategic growth. We help businesses adapt, evolve,
+              and thrive in today&apos;s competitive marketplace.
+            </ContainerAnimated>
+            <ContainerAnimated>
+              <Link to="https://t.me/+85586623507"><Button className=" text-black  ">Start Scaling Today</Button></Link>
+            </ContainerAnimated>
+          </ContainerStagger>
+
+          <GalleryGrid>
+            {IMAGES.map((imageUrl, index) => (
+              <GalleryGridCell index={index} key={index}>
+                <img
+                  className="size-full object-cover object-center"
+                  width="100%"
+                  height="100%"
+                  src={imageUrl}
+                  alt=""
+                />
+              </GalleryGridCell>
+            ))}
+          </GalleryGrid>
+        </div>
+      </section>
     </div>
   );
 };
@@ -202,27 +233,11 @@ const slugs = [
   "figma",
 ];
 // cardRunner for active in the about at the bottom section
-const testimonials = [
-  {
-    image: "/src/assets/image copy 27.png", // replace with actual image path
-    name: "Playing Football",
-  },
-  {
-    image: "/src/assets/image copy 28.png",
-    name: "Playing Tennis",
-  },
-  {
-    image: "/src/assets/image copy 29.png",
-    name: "Playing volleyball",
-  },
-  {
-    image: "/src/assets/image copy 30.png",
-    name: "Coding",
-  },
-  {
-    image: "/src/assets/image copy 31.png",
-    name: "Learn new Tech",
-  },
+const IMAGES = [
+  "https://techcrunch.com/wp-content/uploads/2023/07/GettyImages-1481095076.jpg",
+  "https://thumbs.dreamstime.com/z/high-performance-business-graph-illustration-design-over-white-background-50655045.jpg",
+  "https://tse1.mm.bing.net/th/id/OIP.laPIgjN4A552xFOOJmWHAQHaEP?rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://skyryedesign.com/wp-content/uploads/2023/11/personalisation-ui-1536x1152.png",
 ];
 
 const GridItem = ({ area, icon, title, description }: GridItemProps) => {

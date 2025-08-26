@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import AllRoutes from "./Routes";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
-  <Router>
+  <Router basename="/Portfolio-Me">
     <AllRoutes />
   </Router>
 );
