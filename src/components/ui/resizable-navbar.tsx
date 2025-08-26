@@ -115,6 +115,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   );
 };
 
+import { Link } from "react-router-dom";
+
 export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
@@ -127,12 +129,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <Link
+          key={`link-${idx}`}
+          to={item.link}        // ✅ React Router link
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
           className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
-          key={`link-${idx}`}
-          href={item.link}
         >
           {hovered === idx && (
             <motion.div
@@ -140,12 +142,15 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
             />
           )}
-          <span className="relative z-20 !text-black dark:!text-white">{item.name}</span>
-        </a>
+          <span className="relative z-20 !text-black dark:!text-white">
+            {item.name}
+          </span>
+        </Link>
       ))}
     </motion.div>
   );
 };
+
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
@@ -234,15 +239,16 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
-      href="/"
+    <Link
+      to="/" // ✅ No reload
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <LineShadowText className=" font-bold text-black dark:text-white text-2xl">Menghong.p</LineShadowText>
-    </a>
+      <LineShadowText className="font-bold text-black dark:text-white text-2xl">
+        Menghong.p
+      </LineShadowText>
+    </Link>
   );
 };
-
 export const NavbarButton = ({
   href,
   as: Tag = "a",

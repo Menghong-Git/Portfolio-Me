@@ -15,15 +15,15 @@ import MYButtonStyle from "../ui/MyButton";
 
 export function NavbarDemo() {
   // "/" locally, "/Portfolio-Me/" on GitHub Pages (from vite.config.ts)
-  const base = import.meta.env.BASE_URL; 
+  // const base = import.meta.env.BASE_URL; 
 
   // For NavItems (likely renders <a href>), we must prefix with base.
   const desktopItems = [
-    { name: "Home",       link: `${base}` },
-    { name: "About",      link: `${base}About` },
-    { name: "Experience", link: `${base}Experience` },
-    { name: "Resume",     link: `${base}MyResume` },
-  ];
+  { name: "Home",       link: "/" },
+  { name: "About",      link: "/About" },
+  { name: "Experience", link: "/Experience" },
+  { name: "Resume",     link: "/MyResume" },
+];
 
   // For mobile, use React Router Link so basename handles prefixing.
   const mobileItems = [
