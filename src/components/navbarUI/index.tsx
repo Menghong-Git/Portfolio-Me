@@ -10,45 +10,42 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import MYButtonStyle from "../ui/MyButton";
 
 export function NavbarDemo() {
-  const navItems = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "About",
-      link: "/About",
-    },
-    {
-      name: "Experience",
-      link: "/Experience",
-    },
-    {
-      name: "Resume",
-      link: "/MyResume",
-    },
+  // "/" locally, "/Portfolio-Me/" on GitHub Pages (from vite.config.ts)
+  const base = import.meta.env.BASE_URL; 
+
+  // For NavItems (likely renders <a href>), we must prefix with base.
+  const desktopItems = [
+    { name: "Home",       link: `${base}` },
+    { name: "About",      link: `${base}About` },
+    { name: "Experience", link: `${base}Experience` },
+    { name: "Resume",     link: `${base}MyResume` },
+  ];
+
+  // For mobile, use React Router Link so basename handles prefixing.
+  const mobileItems = [
+    { name: "Home",       link: "/" },
+    { name: "About",      link: "/About" },
+    { name: "Experience", link: "/Experience" },
+    { name: "Resume",     link: "/MyResume" },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="relative w-full  ">
+    <div className="relative w-full">
       <Navbar>
-        {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-
-          <NavItems items={navItems} />
-          <div className="flex items-center gap-4 ">
+          <NavItems items={desktopItems} /> {/* ✅ prefixed paths */}
+          <div className="flex items-center gap-4">
             <MYButtonStyle />
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
@@ -62,24 +59,22 @@ export function NavbarDemo() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
-              <a
+            {mobileItems.map((item, idx) => (
+              <Link
                 key={`mobile-link-${idx}`}
-                href={item.link}
+                to={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative !text-neutral-600 dark:text-neutral-300 "
+                className="relative block !text-neutral-600 dark:text-neutral-300"
               >
-                <span className="block">{item.name}</span>
-              </a>
+                {item.name}
+              </Link>
             ))}
-            <div className="flex items-center gap-4  ">
+            <div className="flex items-center gap-4">
               <MYButtonStyle />
             </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-
-      {/* Navbar */}
     </div>
   );
 }

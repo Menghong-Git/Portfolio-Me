@@ -1,7 +1,7 @@
 import { Star, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ButtonDownload from "./ButtonDownload";
-import MyImage from "@/assets/image copy 3.png"
+import MyImage from "@/assets/image copy 3.png";
 
 type ProfileCardProps = {
   name: string;
@@ -23,9 +23,14 @@ export default function AnimatedProfileCard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-red-100 to-red-400 dark:bg-gray-900 flex items-center min-w-screen justify-center p-4 relative overflow-hidden">
+    <div
+      className="
+  min-h-screen w-screen flex items-center justify-center p-4 relative overflow-hidden
+  bg-gradient-to-b from-white via-red-100 to-red-400
+  dark:bg-gradient-to-b dark:from-gray-950/10 dark:via-gray-800 dark:to-gray-700
+"
+    >
       {/* Animated Grid Background */}
-      
 
       <ProfileCard {...alexProfile} />
 
@@ -135,7 +140,7 @@ function ProfileCard({
             <UserPlus className="mx-auto h-4 w-4 transition-transform duration-300 hover:scale-110" />
           </button>
         </a>
-         <ButtonDownload/>
+        <ButtonDownload />
       </div>
 
       {/* Animated border on hover */}
